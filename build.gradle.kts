@@ -28,10 +28,17 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.liquibase:liquibase-core")
 	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude(module = "junit")
+		exclude(module = "mockito-core")
+	}
 	implementation("org.apache.httpcomponents.client5:httpclient5")
 	implementation("org.jsoup:jsoup:1.17.2")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	testImplementation("io.mockk:mockk:1.13.10")
+	testImplementation("com.ninja-squad:springmockk:4.0.2")
+	testImplementation("org.spekframework.spek2:spek-dsl-jvm:2.0.19")
+	testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:2.0.19")
 
 }
 
@@ -43,5 +50,8 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Test> {
-	useJUnitPlatform()
+	useJUnitPlatform {
+		includeEngines("spek2")
+	}
 }
+

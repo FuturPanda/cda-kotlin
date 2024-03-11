@@ -1,5 +1,6 @@
 package com.example.notificationbackend.web.rest
 
+import com.example.notificationbackend.domain.Notification
 import com.example.notificationbackend.service.NotificationService
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -50,4 +51,8 @@ class NotificationController(
         return temp
     }
 
+    @GetMapping("/all")
+    fun getAllNotifications() : List<Notification> {
+        return emptyList()
+    }
 }
